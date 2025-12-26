@@ -1,0 +1,144 @@
+<!-- ...existing code... -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Translator</title>
+
+    <!-- Simple styles -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        :root{
+            --bg:#f6f8fb;
+            --card:#ffffff;
+            --accent:#2563eb;
+            --muted:#6b7280;
+            --radius:12px;
+        }
+        *{box-sizing:border-box}
+        body{
+            margin:0;
+            font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+            background: linear-gradient(180deg, #f5f7fb 0%, #eef2ff 100%);
+            color:#111827;
+            -webkit-font-smoothing:antialiased;
+            -moz-osx-font-smoothing:grayscale;
+            min-height:100vh;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            padding:2rem;
+        }
+        .card{
+            background:var(--card);
+            width:min(720px, 96%);
+            border-radius:var(--radius);
+            box-shadow:0 8px 30px rgba(16,24,40,0.08);
+            padding:1.5rem;
+        }
+        h1{
+            margin:0 0 .5rem 0;
+            font-size:1.25rem;
+            font-weight:600;
+        }
+        p.lead{
+            margin:0 0 1rem 0;
+            color:var(--muted);
+            font-size:.95rem;
+        }
+        form{
+            display:grid;
+            gap:.75rem;
+        }
+        label{
+            font-size:.85rem;
+            color:var(--muted);
+        }
+        textarea{
+            width:100%;
+            min-height:150px;
+            padding:12px;
+            border-radius:10px;
+            border:1px solid #e6e9ef;
+            resize:vertical;
+            font-size:1rem;
+            line-height:1.4;
+            background:#fbfdff;
+        }
+        .controls{
+            display:flex;
+            gap:.75rem;
+            align-items:center;
+            flex-wrap:wrap;
+        }
+        select{
+            padding:10px 12px;
+            border-radius:10px;
+            border:1px solid #e6e9ef;
+            background:white;
+            font-size:1rem;
+        }
+        button{
+            padding:10px 14px;
+            border-radius:10px;
+            background:var(--accent);
+            color:white;
+            border:none;
+            font-weight:600;
+            cursor:pointer;
+            transition:transform .06s ease, box-shadow .06s;
+        }
+        button:active{ transform:translateY(1px) }
+        button[disabled]{ opacity:.6; cursor:not-allowed }
+        @media (max-width:480px){
+            .controls{ flex-direction:column; align-items:stretch }
+            button{ width:100% }
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h1>Translator</h1>
+        <p class="lead">Enter text and choose a target language to translate.</p>
+
+        <form method="post">
+            {% csrf_token %}
+            <label for="text">Text</label>
+            <textarea id="text" name="translate" required></textarea>
+
+            <div class="controls">
+                <div style="flex:1">
+                    <label for="lang">Target language</label><br>
+                    <select id="lang" name="language" required>
+                        <option value="" disabled selected>Choose language</option>
+                        <option value="ru">Russian</option>
+                        <option value="fr">French</option>
+                        <option value="en">English</option>
+                        <option value="zh-CN">Chinese (Simplified)</option>
+                        <option value="zh-TW">Chinese (Traditional)</option>
+                        <option value="sw">Swahili</option>
+                        <option value="hi">Hindi</option>
+                        <option value="ar">Arabic</option>
+                        <option value="de">Germany</option>
+                        <option value="it">Italia</option>
+                        <option value="ko">Korea</option>
+                        <option value="es">Spanish</option>
+                        <option value="pt">Portuguese</option>
+                        <option value="ta">Tamil</option>
+                        <option value="te">Tegulu</option>
+                        <option value="in">Indonesian</option>
+                        <option value="el">Greek</option>
+                        <option value="af">Afrikaans</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label style="visibility:hidden">Submit</label><br>
+                    <button type="submit">Translate</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
